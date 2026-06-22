@@ -9,6 +9,8 @@ from app.models.tracking_history import TrackingHistory
 from contextlib import asynccontextmanager
 from app.api.tracking import router as tracking_router
 
+from fastapi.middleware.cors import CORSMiddleware
+
 try:
     @asynccontextmanager
     async def lifespan(app: FastAPI):
@@ -26,6 +28,14 @@ try:
     app = FastAPI(
         title="QuickShip Courier Tracking System",
         lifespan=lifespan
+    )
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["http://localhost:5173"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"]
     )
 
     @app.get("/")
