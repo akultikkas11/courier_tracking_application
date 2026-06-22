@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, func
+from sqlalchemy.orm import relationship
 
 from datetime import datetime
 
@@ -12,7 +13,7 @@ class TrackingHistory(Base):
 
     package_id = Column(
         Integer,
-        ForeignKey("packages.id")
+        ForeignKey("packages.id", ondelete="CASCADE")
     )
 
     status = Column(
@@ -29,5 +30,11 @@ class TrackingHistory(Base):
 
     updated_at = Column(
         DateTime,
-        default=datetime.utcnow
+        default=datetime.utcnow,
+        server_default=func.now()
+    )
+
+    package = relationship(
+        "Package",
+        back_populates="tracking_histories"
     )

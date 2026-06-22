@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, func
+from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.database.base import Base
 
@@ -15,7 +16,7 @@ class Package(Base):
 
     customer_id = Column(
         Integer,
-        ForeignKey("customers.id")
+        ForeignKey("customers.id", ondelete="CASCADE")
     )
 
     receiver_name = Column(
@@ -47,5 +48,17 @@ class Package(Base):
 
     created_at = Column(
         DateTime,
-        default=datetime.utcnow
+        default=datetime.utcnow,
+        server_default=func.now()
+    )
+
+    customer = relationship(
+        "Customer",
+        back_populates="packages",
+    )
+
+    tracking_histories = relationship(
+        "TrackingHistory",
+        back_populates = "package",
+        cascade="all, delete-orphan"
     )

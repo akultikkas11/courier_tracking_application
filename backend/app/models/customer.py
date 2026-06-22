@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, func
+from sqlalchemy.orm import relationship
 from datetime import datetime
 
 from app.database.base import Base
@@ -12,5 +13,13 @@ class Customer(Base):
     email = Column(String(100), nullable=False, unique=True)
     created_at = Column(
         DateTime,
-        default=datetime.utcnow
+        default=datetime.utcnow,        # This is for SQLAlchemy ORM inserts
+        server_default = func.now()     # This is for database-level inserts (during testing)
+    )
+
+    # One customer can have many packages
+    packages = relationship(
+        "Package",
+        back_populates="customer",
+        cascade="all, delete-orphan"
     )
