@@ -9,6 +9,10 @@ class TrackingHistoryResponse(BaseModel):
 
 
 class TrackingResponse(BaseModel):
+    sender_name: str
+    sender_phone_no: str
+    sender_email: str
+
     tracking_id: str
     receiver_name: str
     receiver_phone: str
