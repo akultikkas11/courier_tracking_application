@@ -1,0 +1,98 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+}
+
+.nav {
+  display: flex;
+  width: min(1120px, calc(100% - 32px));
+  min-height: 72px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #111827;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.brandMark {
+  display: inline-grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 8px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.link,
+.supportLink {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 0 14px;
+  color: #374151;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.link:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.supportLink {
+  border: 1px solid #d1d5db;
+  color: #111827;
+}
+
+.supportLink:hover {
+  background: #111827;
+  color: #ffffff;
+}
+
+@media (max-width: 520px) {
+  .nav {
+    width: min(100% - 24px, 1120px);
+    min-height: 64px;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .brandMark {
+    width: 32px;
+    height: 32px;
+  }
+
+  .supportLink {
+    display: none;
+  }
+}

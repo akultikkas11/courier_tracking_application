@@ -283,37 +283,53 @@ export default function TrackingPage() {
                     (event, index) => (
                       <li
                         key={`${event.status}-${event.location}-${index}`}
-                        className="
-                        relative
-                        border-l
-                        border-slate-200
-                        pl-5
-                        "
+                        className="relative pl-5"
                       >
+                        {/* Vertical line */}
+                        {index !== trackingData.history.length - 1 && (
+                          <div
+                            className={`
+                              absolute
+                              left-0
+                              top-5
+                              w-0.5
+                              h-full
+                              ${
+                                index < trackingData.history.length - 1
+                                  ? "bg-emerald-500"
+                                  : "bg-slate-200"
+                              }
+                            `}
+                          />
+                        )}
+
+                        {/* Status dot */}
                         <span
-                          className="
-                          absolute
-                          -left-2
-                          top-1
-                          h-4
-                          w-4
-                          rounded-full
-                          bg-slate-950
-                          ring-4
-                          ring-white
-                          "
+                          className={`
+                            absolute
+                            -left-2
+                            top-1
+                            h-4
+                            w-4
+                            rounded-full
+                            ring-4
+                            ring-white
+                            ${
+                              index === trackingData.history.length - 1
+                                ? "bg-blue-500"
+                                : "bg-emerald-500"
+                            }
+                          `}
                         />
-                        <p
-                          className="
-                          font-semibold
-                          text-slate-950
-                          "
-                        >
+
+                        <p className="font-semibold text-slate-950">
                           {event.status}
                         </p>
+
                         <p className="text-sm text-slate-600">
                           {event.location}
                         </p>
+
                         {event.remarks && (
                           <p className="mt-1 text-sm text-slate-500">
                             {event.remarks}
